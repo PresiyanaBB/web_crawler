@@ -294,7 +294,7 @@ func main() {
 
 	crawlerRepo := mysql.New(mysql.MySQLOptions{
 		URI: fmt.Sprintf("%s:%s@tcp(127.0.0.1)/img_crawler_app",
-			"sisi", "sisipresiana03"),
+			"{name}", "{password}"),
 	})
 	crawlerRepo.Init()
 	crawler_appp := crawler_app.New(crawlerRepo)
