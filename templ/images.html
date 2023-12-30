@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+}
+body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f1f1f1;
+}
+
+.post {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.btn {
+    margin: 10px 10px;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.bin {
+    position: absolute;
+    right: 40px;
+}
+    </style>
+    <title>Images</title>
+</head>
+<body>
+    <div class="header">
+        <h2>All Images Generated</h2><br>
+        <form action="/show" method="POST" id="post-form">
+            <input type="text" name="search_bar_site" placeholder="site name"> 
+            <input type="text" name="search_bar_res" placeholder="resolution"> 
+            <input type="submit" class="btn" value="Submit">
+        </form>
+    </div>
+    <div class="row">
+        {{range .}}
+        <div class="post">
+            <h5>
+                <img src="{{.Src}}"><br>
+                site title: {{.Filename}} <br> 
+                alternative text: {{.AlternativeText}} <br>
+                resolution: {{.Resolution}} <br>
+                format: {{.Format}} <br>
+            </h5>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>
