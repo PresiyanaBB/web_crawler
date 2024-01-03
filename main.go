@@ -84,19 +84,23 @@ func ExtractImages(cr *crawler, doc *html.Node) {
 	}
 	guard <- struct{}{}
 	if stop_time.Compare(time.Now()) <= 0 {
+		<-guard
 		return
 	}
 	node, err := FindAttribute(doc, "title")
 	if err != nil {
+		<-guard
 		return
 	}
 	entries, err := FindAttribute(doc, "img")
 	if err != nil {
+		<-guard
 		return
 	}
 
 	for _, entry := range entries {
 		if stop_time.Compare(time.Now()) <= 0 {
+			<-guard
 			return
 		}
 		var src, alt, width, height string
@@ -124,6 +128,7 @@ func ExtractImages(cr *crawler, doc *html.Node) {
 			Format:          src_split[len(src_split)-1],
 		}
 		if stop_time.Compare(time.Now()) <= 0 {
+			<-guard
 			return
 		}
 		for len(guard) == MAX_GOROUTINES_COUNT {
